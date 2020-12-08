@@ -16,8 +16,6 @@
 
 module.exports = function (RED) {
     "use strict";
-    var fs = require('fs');
-    var minimatch = require("minimatch");
 
     function AWSNode(n) {
         RED.nodes.createNode(this, n);
@@ -43,8 +41,7 @@ module.exports = function (RED) {
         this.awsConfig = RED.nodes.getNode(n.aws);
         // eu-west-1||us-east-1||us-west-1||us-west-2||eu-central-1||ap-northeast-1||ap-northeast-2||ap-southeast-1||ap-southeast-2||sa-east-1
         this.region = n.region || "us-east-1";
-        this.bucket = n.bucket;
-        this.filepattern = n.filepattern || "";
+        
         var node = this;
         var AWS = this.awsConfig ? this.awsConfig.AWS : null;
 
@@ -82,72 +79,7 @@ module.exports = function (RED) {
                 console.log(data);           // successful response
             });
         })
-        // costExplorer.listObjects({ Bucket: node.bucket }, function (err, data) {
-        //     if (err) {
-        //         node.error(RED._("aws.error.failed-to-fetch", { err: err }));
-        //         node.status({ fill: "red", shape: "ring", text: "aws.status.error" });
-        //         return;
-        //     }
-        //     var contents = node.filterContents(data.Contents);
-        //     node.state = contents.map(function (e) { return e.Key; });
-        //     node.status({});
-        //     node.on("input", function (msg) {
-        //         node.status({ fill: "blue", shape: "dot", text: "aws.status.checking-for-changes" });
-
-        //         // costExplorer.listObjects({ Bucket: node.bucket }, function (err, data) {
-        //         //     if (err) {
-        //         //         node.error(RED._("aws.error.failed-to-fetch", { err: err }), msg);
-        //         //         node.status({});
-        //         //         return;
-        //         //     }
-        //         //     node.status({});
-        //         //     var newContents = node.filterContents(data.Contents);
-        //         //     var seen = {};
-        //         //     var i;
-        //         //     msg.bucket = node.bucket;
-        //         //     for (i = 0; i < node.state.length; i++) {
-        //         //         seen[node.state[i]] = true;
-        //         //     }
-        //         //     for (i = 0; i < newContents.length; i++) {
-        //         //         var file = newContents[i].Key;
-        //         //         if (seen[file]) {
-        //         //             delete seen[file];
-        //         //         } else {
-        //         //             msg.payload = file;
-        //         //             msg.file = file.substring(file.lastIndexOf('/') + 1);
-        //         //             msg.event = 'add';
-        //         //             msg.data = newContents[i];
-        //         //             node.send(msg);
-        //         //         }
-        //         //     }
-        //         //     for (var f in seen) {
-        //         //         if (seen.hasOwnProperty(f)) {
-        //         //             msg.payload = f;
-        //         //             msg.file = f.substring(f.lastIndexOf('/') + 1);
-        //         //             msg.event = 'delete';
-        //         //             // msg.data intentionally null
-        //         //             node.send(msg);
-        //         //         }
-        //         //     }
-        //         //     node.state = newContents.map(function (e) { return e.Key; });
-        //         // });
-        //     });
-        //     var interval = setInterval(function () {
-        //         node.emit("input", {});
-        //     }, 900000); // 15 minutes
-        //     node.on("close", function () {
-        //         if (interval !== null) {
-        //             clearInterval(interval);
-        //         }
-        //     });
-        // });
+        
     }
     RED.nodes.registerType("amazon cost usage", AmazonCostUsage);
-
-    AmazonCostUsage.prototype.filterContents = function (contents) {
-        var node = this;
-        return node.filepattern ? contents.filter(function (e) {
-            return minimatch(e.Key, node.filepattern);
-        }) : contents;
-    };
 };

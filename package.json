@@ -1,7 +1,6 @@
 {
   "dependencies": {
-    "aws-sdk": "^2.805.0",
-    "minimatch": "^3.0.4"
+    "aws-sdk": "^2.805.0"
   },
   "name": "red-contrib-aws-service",
   "version": "0.0.1",
