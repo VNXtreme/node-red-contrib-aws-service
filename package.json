@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.805.0",
+    "minimatch": "^3.0.4"
+  },
+  "name": "red-contrib-aws-service",
+  "version": "0.0.1",
+  "main": "aws.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node-red",
+    "aws"
+  ],
+  "node-red": {
+    "nodes": {
+      "amazon cost usage": "aws.js"
+    }
+  },
+  "author": "Xtreme",
+  "license": "ISC",
+  "description": ""
+}
