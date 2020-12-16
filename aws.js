@@ -39,9 +39,7 @@ module.exports = function (RED) {
     function AmazonCostUsage(n) {
         RED.nodes.createNode(this, n);
         this.awsConfig = RED.nodes.getNode(n.aws);
-        // eu-west-1||us-east-1||us-west-1||us-west-2||eu-central-1||ap-northeast-1||ap-northeast-2||ap-southeast-1||ap-southeast-2||sa-east-1
-        this.region = n.region || "us-east-1";
-        
+
         var node = this;
         var AWS = this.awsConfig ? this.awsConfig.AWS : null;
 
@@ -49,21 +47,28 @@ module.exports = function (RED) {
             node.warn(RED._("aws.warn.missing-credentials"));
             return;
         }
-        var costExplorer = new AWS.CostExplorer({ "region": node.region });
-        var params = {
-            Metrics: [ /* required */
-                'AmortizedCost',
-                /* more items */
-            ],
-            TimePeriod: { /* required */
-                End: '2020-12-07', /* required */
-                Start: '2020-12-01' /* required */
-            },
-            Granularity : "DAILY"
-        };
-        
+
+
 
         node.on("input", function (msg) {
+            // eu-west-1||us-east-1||us-west-1||us-west-2||eu-central-1||ap-northeast-1||ap-northeast-2||ap-southeast-1||ap-southeast-2||sa-east-1
+            let region = msg.region || n.region || "us-east-1";
+            let metric = msg.metric || n.metric || "AmortizedCost";
+            let time = n.time.split(' - ') || [new Date().toJSON().slice(0, 10), new Date().toJSON().slice(0, 10)];
+            let granularity = msg.granularity || n.granularity || "DAILY";
+            let params = {
+                Metrics: [ /* required */
+                    metric
+                    /* more items */
+                ],
+                TimePeriod: { /* required */
+                    Start: time[0], /* required */
+                    End: time[1], /* required */
+                },
+                Granularity: granularity
+            };
+            let costExplorer = new AWS.CostExplorer({ region });
+
             node.status({ fill: "blue", shape: "dot", text: "aws.status.initializing" });
 
             costExplorer.getCostAndUsage(params, function (err, data) {
@@ -79,7 +84,7 @@ module.exports = function (RED) {
                 console.log(data);           // successful response
             });
         })
-        
+
     }
     RED.nodes.registerType("amazon cost usage", AmazonCostUsage);
 };

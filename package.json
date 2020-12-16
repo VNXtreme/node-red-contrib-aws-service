@@ -3,7 +3,7 @@
     "aws-sdk": "^2.805.0"
   },
   "name": "node-red-contrib-aws-service",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "aws.js",
   "devDependencies": {},
   "scripts": {
