@@ -10,11 +10,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-<script type="text/x-red" data-template-name="amazon cost usage">
+<script type="text/x-red" data-template-name="amazon-cost-usage">
     <div class="form-row">
         <label for="node-input-aws"><i class="fa fa-user"></i> <span data-i18n="aws.label.aws"></span></label>
         <input type="text" id="node-input-aws">
@@ -64,8 +61,9 @@
           </select>
     </div>
     <div class="form-row">
-        <label for="node-input-time"><i class="fa fa-calendar"></i> Time</label>
-        <input type="text" id="node-input-time"  >
+        <label for="node-input-from"><i class="fa fa-calendar"></i> Time</label>
+        <input type="date" id="node-input-from" style="width:35%">
+        <input type="date" id="node-input-to" style="width:35%">
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="aws.label.name"></span></label>
@@ -73,12 +71,12 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="amazon cost usage">
-    <p>Amazon cost usage node.
+<script type="text/x-red" data-help-name="amazon-cost-usage">
+    <p>amazon-cost-usage node.
 </script>
 
-<script type="text/javascript">
-    RED.nodes.registerType('amazon cost usage', {
+<script defer type="text/javascript">
+    RED.nodes.registerType('amazon-cost-usage', {
         category: 'AWS',
         color: "#C0DEED",
         defaults: {
@@ -86,7 +84,8 @@
             name: { value: "" },
             region: { value: "", required: true },
             metric: { value: "AmortizedCost", required: true },
-            time: { value: "", required: true },
+            from: { value: "", required: true },
+            to: { value: "", required: true },
             granularity: { value: "DAILY", required: true }
         },
         inputs: 1,
@@ -96,13 +95,7 @@
         label: function () {
             return this.name || "Cost usage";
         },
-        oneditprepare: function () {
-            $('input[id="node-input-time"]').daterangepicker({
-                locale: {
-                    format: 'YYYY-MM-DD'
-                }
-            });
-        },
+        oneditprepare: function () {},
     });
 </script>
 

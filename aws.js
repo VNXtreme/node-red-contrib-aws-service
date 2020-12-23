@@ -48,22 +48,23 @@ module.exports = function (RED) {
             return;
         }
 
-
-
         node.on("input", function (msg) {
             // eu-west-1||us-east-1||us-west-1||us-west-2||eu-central-1||ap-northeast-1||ap-northeast-2||ap-southeast-1||ap-southeast-2||sa-east-1
             let region = msg.region || n.region || "us-east-1";
             let metric = msg.metric || n.metric || "AmortizedCost";
-            let time = n.time.split(' - ') || [new Date().toJSON().slice(0, 10), new Date().toJSON().slice(0, 10)];
+            let from = n.from || new Date().toJSON().slice(0, 10);
+            let to = n.to || new Date().toJSON().slice(0, 10);
             let granularity = msg.granularity || n.granularity || "DAILY";
+            console.log('from', from, 'to', to);
+            
             let params = {
                 Metrics: [ /* required */
                     metric
                     /* more items */
                 ],
                 TimePeriod: { /* required */
-                    Start: time[0], /* required */
-                    End: time[1], /* required */
+                    Start: from, /* required */
+                    End: to, /* required */
                 },
                 Granularity: granularity
             };
@@ -86,5 +87,5 @@ module.exports = function (RED) {
         })
 
     }
-    RED.nodes.registerType("amazon cost usage", AmazonCostUsage);
+    RED.nodes.registerType("amazon-cost-usage", AmazonCostUsage);
 };
