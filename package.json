@@ -20,6 +20,7 @@
   },
   "author": "Xtreme",
   "license": "ISC",
+  "homepage": "https://github.com/VNXtreme/node-red-node-aws-service",
   "dependencies": {
     "aws-sdk": "^2.805.0"
   }
