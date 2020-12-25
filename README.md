@@ -1,8 +1,7 @@
 node-red-node-aws-service
-
 =================
 
-A <a href="http://nodered.org" target="_new">Node-RED</a> node to receive cost usage from AWS.
+A <a href="http://nodered.org" target="_new">Node-RED</a> node to receive service cost usage from AWS.
 This project is inspired and forked from <a href="https://github.com/node-red/node-red-web-nodes" target="_new">node-red-node-aws</a>
 
 Install
@@ -15,7 +14,8 @@ Run the following command in the root directory of your Node-RED install
 Usage
 -----
 
-### AWS cost usage
+### AWS service cost usage
 
-Receive data from cost explorer. The event messages consist of the data
+Receive data from CostExplorer API. The event messages consist of the data
 in `msg.payload` property.
+This node requires Read permission in Policy of Cost Explorer Service. For reference, please check <a href="https://stackoverflow.com/a/63225391" target="_new">this guide</a>.

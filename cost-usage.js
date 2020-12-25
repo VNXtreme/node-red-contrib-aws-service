@@ -41,7 +41,15 @@ module.exports = function (RED) {
             node.status({ fill: "blue", shape: "dot", text: "aws.status.initializing" });
 
             let costExplorer = new AWS.CostExplorer({ region });
-            let filters = await getAWSfilters(costExplorer, from, to);
+            let filters;
+            try {
+                filters = await getAWSfilters(costExplorer, from, to);
+            } catch (err) {
+                console.log(err, err.stack); // an error occurred
+                node.error(RED._("aws.error.fail", { err: err }), msg);
+                node.status({ fill: "red", shape: "ring", text: "aws.status.error" });
+                return;
+            }
             let params = {
                 Metrics: [
                     /* required */
@@ -73,12 +81,6 @@ module.exports = function (RED) {
                 ],
             };
             costExplorer.getCostAndUsage(params, function (err, data) {
-                if (err) {
-                    console.log(err, err.stack); // an error occurred
-                    node.error(RED._("aws.error.fail", { err: err }), msg);
-                    node.status({ fill: "red", shape: "ring", text: "aws.status.error" });
-                    return;
-                }
                 msg.payload = data;
                 node.status({});
                 node.send(msg); // successful response
@@ -95,15 +97,9 @@ module.exports = function (RED) {
             },
             Context: "COST_AND_USAGE",
         };
+
         let awsFilters = await costExplorer
             .getDimensionValues(dimensionParams, function (err, data) {
-                if (err) {
-                    console.log(err, err.stack); // an error occurred
-                    node.error(RED._("aws.error.fail", { err: err }), msg);
-                    node.status({ fill: "red", shape: "ring", text: "aws.status.error" });
-                    return;
-                }
-
                 return data;
             })
             .promise();
