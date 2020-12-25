@@ -10,7 +10,8 @@
             "metric": "Metric",
             "local": "Local Filename",
             "keyid": "AccessKeyID",
-            "secret": "Secret Access Key"
+            "secret": "Secret Access Key",
+            "granularity": "Granularity"
         },
         "placeholder": {
             "bucket": "bucket name",

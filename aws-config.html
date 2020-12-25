@@ -1,0 +1,31 @@
+<script type="text/x-red" data-template-name="aws-config">
+    <div class="form-row">
+        <label for="node-config-input-accesskeyid"><i class="fa fa-bookmark"></i><span data-i18n="aws.label.keyid"></span></label>
+        <input class="input-append-left" type="text" id="node-config-input-accesskeyid" style="width: 40%;" >
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-secretaccesskey"><i class="fa fa-bookmark"></i><span data-i18n="aws.label.secret"></span></label>
+        <input class="input-append-left" type="text" id="node-config-input-secretaccesskey" style="width: 40%;" >
+    </div>
+    <div class="form-tips">
+        <span data-i18n="[html]aws.tip.config1"></span>
+        <span data-i18n="[html]aws.tip.config2"></span>
+    </div>
+</script>
+
+<script type="text/javascript">
+    (function () {
+        RED.nodes.registerType('aws-config', {
+            category: 'config',
+            defaults: {},
+            credentials: {
+                accesskeyid: { type: "text", required: true },
+                secretaccesskey: { type: "password", required: true },
+            },
+            label: function () {
+                return "AWS config";
+            },
+            exportable: false,
+        });
+    })();
+</script>
