@@ -1,17 +1,17 @@
-node-red-node-aws-service
-=================
+# node-red-node-aws-service
+
 
 A <a href="http://nodered.org" target="_new">Node-RED</a> node to receive service cost usage from AWS.
 This project is inspired and forked from <a href="https://github.com/node-red/node-red-web-nodes" target="_new">node-red-node-aws</a>
 
-Install
+# Install
 -------
 
 Run the following command in the root directory of your Node-RED install
 
         npm install node-red-node-aws-service
 
-Usage
+# Usage
 -----
 
 ### AWS service cost usage

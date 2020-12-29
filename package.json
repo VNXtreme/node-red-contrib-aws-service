@@ -1,7 +1,7 @@
 {
   "name": "node-red-contrib-aws-service",
   "description": "",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "cost-usage.js",
   "devDependencies": {},
   "scripts": {
@@ -20,6 +20,10 @@
   },
   "author": "Xtreme",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VNXtreme/node-red-contrib-aws-service"
+  },
   "dependencies": {
     "aws-sdk": "^2.805.0"
   }
