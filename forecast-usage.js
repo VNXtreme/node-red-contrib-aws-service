@@ -34,7 +34,6 @@ module.exports = function (RED) {
             // eu-west-1||us-east-1||us-west-1||us-west-2||eu-central-1||ap-northeast-1||ap-northeast-2||ap-southeast-1||ap-southeast-2||sa-east-1
             let region = msg.region || n.region || "us-east-1";
             let metric = msg.metric || n.metric || "AMORTIZED_COST";
-            
             let granularity = msg.granularity || n.granularity || "MONTHLY";
 
             let today = new Date();

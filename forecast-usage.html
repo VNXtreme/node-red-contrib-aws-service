@@ -67,8 +67,7 @@
 </script>
 
 <script type="text/x-red" data-help-name="amazon-forecast-usage">
-    <h3>AWS getCostUsage node</h3>
-    <p>Group by Dimension of SERVICE and Context of COST_AND_USAGE</p>
+    <h3>AWS getCostForecast node</h3>
 
     <h3>Inputs</h3>
     <dl class="message-properties">
@@ -81,16 +80,6 @@
             <span class="property-type">string</span>
         </dt>
         <dd>AWS metrics. Default to AmortizedCost</dd>
-
-        <dt>from
-            <span class="property-type">string</span>
-        </dt>
-        <dd>Date in the format of YYYY-MM-DD. Default to today</dd>
-
-        <dt>to
-            <span class="property-type">string</span>
-        </dt>
-        <dd>Date in the format of YYYY-MM-DD. Default to today</dd>
 
         <dt>granularity
             <span class="property-type">string</span>
@@ -115,9 +104,8 @@
             aws: { type: "aws-config", required: true },
             name: { value: "" },
             region: { value: "", required: true },
-            metric: { value: "AmortizedCost", required: true },
-            time: { value: "next-month" },
-            granularity: { value: "DAILY", required: true }
+            metric: { value: "AMORTIZED_COST", required: true },
+            granularity: { value: "MONTHLY", required: true }
         },
         inputs: 1,
         outputs: 1,
