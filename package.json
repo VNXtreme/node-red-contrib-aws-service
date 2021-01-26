@@ -1,7 +1,7 @@
 {
   "name": "node-red-contrib-aws-service",
   "description": "",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "cost-usage.js",
   "devDependencies": {},
   "scripts": {
@@ -10,11 +10,13 @@
   "keywords": [
     "node-red",
     "aws",
-    "cost-usage"
+    "cost-usage",
+    "forecast-usage"
   ],
   "node-red": {
     "nodes": {
       "amazon-cost-usage": "cost-usage.js",
+      "amazon-forecast-usage": "forecast-usage.js",
       "aws-config": "aws-config.js"
     }
   },

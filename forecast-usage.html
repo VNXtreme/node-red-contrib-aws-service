@@ -11,7 +11,7 @@
   limitations under the License.
 -->
 
-<script type="text/x-red" data-template-name="amazon-cost-usage">
+<script type="text/x-red" data-template-name="amazon-forecast-usage">
     <div class="form-row">
         <label for="node-input-aws"><i class="fa fa-user"></i> <span data-i18n="aws.label.aws"></span></label>
         <input type="text" id="node-input-aws">
@@ -43,13 +43,13 @@
     <div class="form-row">
         <label for="node-input-metric"><i class="fa fa-filter"></i> <span data-i18n="aws.label.metric"></span></label>
         <select type="text" id="node-input-metric" style="width:70%;">
-            <option selected value="AMORTIZED_COST">AmortizedCost</option>
-            <option value="BLENDED_COST">BlendedCost</option>
-            <option value="NET_AMORTIZED_COST">NetAmortizedCost</option>
-            <option value="NET_UNBLENDED_COST">NetUnblendedCost</option>
-            <option value="NORMALIZED_USAGE_AMOUNT">NormalizedUsageAmount</option>
-            <option value="UNBLENDED_COST">UnblendedCost</option>
-            <option value="USAGE_QUANTITY">UsageQuantity</option>
+          <option selected value="AMORTIZED_COST">AmortizedCost</option>
+          <option value="BLENDED_COST">BlendedCost</option>
+          <option value="NET_AMORTIZED_COST">NetAmortizedCost</option>
+          <option value="NET_UNBLENDED_COST">NetUnblendedCost</option>
+          <option value="NORMALIZED_USAGE_AMOUNT">NormalizedUsageAmount</option>
+          <option value="UNBLENDED_COST">UnblendedCost</option>
+          <option value="USAGE_QUANTITY">UsageQuantity</option>
         </select>
     </div>
     <div class="form-row">
@@ -61,17 +61,12 @@
           </select>
     </div>
     <div class="form-row">
-        <label for="node-input-from"><i class="fa fa-calendar"></i> Time</label>
-        <input type="date" id="node-input-from" style="width:35%">
-        <input type="date" id="node-input-to" style="width:35%">
-    </div>
-    <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="aws.label.name"></span></label>
         <input type="text" id="node-input-name" data-i18n="[placeholder]aws.placeholder.name">
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="amazon-cost-usage">
+<script type="text/x-red" data-help-name="amazon-forecast-usage">
     <h3>AWS getCostUsage node</h3>
     <p>Group by Dimension of SERVICE and Context of COST_AND_USAGE</p>
 
@@ -113,7 +108,7 @@
 </script>
 
 <script defer type="text/javascript">
-    RED.nodes.registerType('amazon-cost-usage', {
+    RED.nodes.registerType('amazon-forecast-usage', {
         category: 'AWS',
         color: "#C0DEED",
         defaults: {
@@ -121,8 +116,7 @@
             name: { value: "" },
             region: { value: "", required: true },
             metric: { value: "AmortizedCost", required: true },
-            from: { value: "", required: true },
-            to: { value: "", required: true },
+            time: { value: "next-month" },
             granularity: { value: "DAILY", required: true }
         },
         inputs: 1,
@@ -130,7 +124,7 @@
         icon: "amazon.png",
         align: "right",
         label: function () {
-            return this.name || "Cost usage";
+            return this.name || "Forecast usage";
         },
         oneditprepare: function () {},
     });
