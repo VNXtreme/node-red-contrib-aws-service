@@ -1,4 +1,4 @@
-# node-red-node-aws-service
+# node-red-contrib-aws-service
 -------
 
 A <a href="http://nodered.org" target="_new">Node-RED</a> node to receive service cost usage from AWS.
@@ -9,7 +9,7 @@ This project is inspired and forked from <a href="https://github.com/node-red/no
 
 Run the following command in the root directory of your Node-RED install
 
-        npm install node-red-node-aws-service
+        npm install node-red-contrib-aws-service
 
 # Usage
 -----

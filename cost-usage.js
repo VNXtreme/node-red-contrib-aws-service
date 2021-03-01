@@ -31,7 +31,6 @@ module.exports = function (RED) {
         }
 
         node.on("input", async function (msg) {
-            // eu-west-1||us-east-1||us-west-1||us-west-2||eu-central-1||ap-northeast-1||ap-northeast-2||ap-southeast-1||ap-southeast-2||sa-east-1
             let region = msg.region || n.region || "us-east-1";
             let metric = msg.metric || n.metric || "AmortizedCost";
             let from = msg.from || n.from || new Date().toJSON().slice(0, 10);
@@ -39,8 +38,9 @@ module.exports = function (RED) {
             let granularity = msg.granularity || n.granularity || "DAILY";
 
             node.status({ fill: "blue", shape: "dot", text: "aws.status.initializing" });
-
+ 
             let costExplorer = new AWS.CostExplorer({ region });
+            
             let filters;
             try {
                 filters = await getAWSfilters(costExplorer, from, to);
