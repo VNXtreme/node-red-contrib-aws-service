@@ -39,7 +39,7 @@ module.exports = function (RED) {
 
             node.status({ fill: "blue", shape: "dot", text: "aws.status.initializing" });
  
-            let costExplorer = new AWS.CostExplorer({ region });
+            let costExplorer = new AWS.CostExplorer();
             
             let filters;
             try {
@@ -61,18 +61,32 @@ module.exports = function (RED) {
                     End: to /* required */,
                 },
                 Filter: {
-                    /* Expression */
-                    Dimensions: {
-                        Key: "SERVICE",
-                        MatchOptions: [
-                            "EQUALS",
-                            /* more items */
-                        ],
-                        Values: filters,
-                    },
+                    And: [
+                        /* Expression */
+                        {
+                            Dimensions: {
+                                Key: "REGION",
+                                Values: region,
+                            }
+                        },
+                        {
+                            Dimensions: {
+                                Key: "SERVICE",
+                                MatchOptions: [
+                                    "EQUALS",
+                                    /* more items */
+                                ],
+                                Values: filters,
+                            }
+                        }
+                    ],
                 },
                 Granularity: granularity,
                 GroupBy: [
+                    {
+                        Key: "REGION",
+                        Type: "DIMENSION",
+                    },
                     {
                         Key: "SERVICE",
                         Type: "DIMENSION",

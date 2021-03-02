@@ -9,6 +9,7 @@ module.exports = function (RED) {
             this.AWS.config.update({
                 accessKeyId: this.credentials.accesskeyid,
                 secretAccessKey: this.credentials.secretaccesskey,
+                region: "us-east-1"
             });
         }
     }
