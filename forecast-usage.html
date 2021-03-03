@@ -12,108 +12,108 @@
 -->
 
 <script type="text/x-red" data-template-name="amazon-forecast-usage">
-    <div class="form-row">
-        <label for="node-input-aws"><i class="fa fa-user"></i> <span data-i18n="aws.label.aws"></span></label>
-        <input type="text" id="node-input-aws">
-    </div>
-    <div class="form-row">
-        <label for="node-input-region"><i class="fa fa-tag"></i> <span data-i18n="aws.label.region"></span></label>
-        <select type="text" id="node-input-region" style="width:70%;">
-          <option selected value="us-east-1">us-east-1</option>
-          <option value="us-east-2">us-east-2</option>
-          <option value="us-west-1">us-west-1</option>
-          <option value="us-west-2">us-west-2</option>
-          <option value="ap-south-1">ap-south-1</option>
-          <option value="ap-northeast-1">ap-northeast-1</option>
-          <option value="ap-northeast-2">ap-northeast-2</option>
-          <option value="ap-northeast-3">ap-northeast-3</option>
-          <option value="ap-southeast-1">ap-southeast-1</option>
-          <option value="ap-southeast-2">ap-southeast-2</option>
-          <option value="ca-central-1">ca-central-1</option>
-          <option value="cn-north-1">cn-north-1</option>
-          <option value="cn-northwest-1">cn-northwest-1</option>
-          <option value="eu-central-1">eu-central-1</option>
-          <option value="eu-west-1">eu-west-1</option>
-          <option value="eu-west-2">eu-west-2</option>
-          <option value="eu-west-3">eu-west-3</option>
-          <option value="eu-north-1">eu-north-1</option>
-          <option value="sa-east-1">sa-east-1</option>
+  <div class="form-row">
+      <label for="node-input-aws"><i class="fa fa-user"></i> <span data-i18n="aws.label.aws"></span></label>
+      <input type="text" id="node-input-aws">
+  </div>
+  <div class="form-row">
+      <label for="node-input-region"><i class="fa fa-tag"></i> <span data-i18n="aws.label.region"></span></label>
+      <select multiple type="text" id="node-input-region" style="width:70%;">
+        <option selected value="us-east-1">us-east-1</option>
+        <option value="us-east-2">us-east-2</option>
+        <option value="us-west-1">us-west-1</option>
+        <option value="us-west-2">us-west-2</option>
+        <option value="ap-south-1">ap-south-1</option>
+        <option value="ap-northeast-1">ap-northeast-1</option>
+        <option value="ap-northeast-2">ap-northeast-2</option>
+        <option value="ap-northeast-3">ap-northeast-3</option>
+        <option value="ap-southeast-1">ap-southeast-1</option>
+        <option value="ap-southeast-2">ap-southeast-2</option>
+        <option value="ca-central-1">ca-central-1</option>
+        <option value="cn-north-1">cn-north-1</option>
+        <option value="cn-northwest-1">cn-northwest-1</option>
+        <option value="eu-central-1">eu-central-1</option>
+        <option value="eu-west-1">eu-west-1</option>
+        <option value="eu-west-2">eu-west-2</option>
+        <option value="eu-west-3">eu-west-3</option>
+        <option value="eu-north-1">eu-north-1</option>
+        <option value="sa-east-1">sa-east-1</option>
+      </select>
+  </div>
+  <div class="form-row">
+      <label for="node-input-metric"><i class="fa fa-filter"></i> <span data-i18n="aws.label.metric"></span></label>
+      <select type="text" id="node-input-metric" style="width:70%;">
+        <option selected value="AMORTIZED_COST">AmortizedCost</option>
+        <option value="BLENDED_COST">BlendedCost</option>
+        <option value="NET_AMORTIZED_COST">NetAmortizedCost</option>
+        <option value="NET_UNBLENDED_COST">NetUnblendedCost</option>
+        <option value="NORMALIZED_USAGE_AMOUNT">NormalizedUsageAmount</option>
+        <option value="UNBLENDED_COST">UnblendedCost</option>
+        <option value="USAGE_QUANTITY">UsageQuantity</option>
+      </select>
+  </div>
+  <div class="form-row">
+      <label for="node-input-granularity"><i class="fa fa-filter"></i> <span data-i18n="aws.label.granularity"></span></label>
+      <select type="text" id="node-input-granularity" style="width:70%;">
+          <option value="HOURLY">HOURLY</option>
+          <option selected value="DAILY">DAILY</option>
+          <option value="MONTHLY">MONTHLY</option>
         </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-metric"><i class="fa fa-filter"></i> <span data-i18n="aws.label.metric"></span></label>
-        <select type="text" id="node-input-metric" style="width:70%;">
-          <option selected value="AMORTIZED_COST">AmortizedCost</option>
-          <option value="BLENDED_COST">BlendedCost</option>
-          <option value="NET_AMORTIZED_COST">NetAmortizedCost</option>
-          <option value="NET_UNBLENDED_COST">NetUnblendedCost</option>
-          <option value="NORMALIZED_USAGE_AMOUNT">NormalizedUsageAmount</option>
-          <option value="UNBLENDED_COST">UnblendedCost</option>
-          <option value="USAGE_QUANTITY">UsageQuantity</option>
-        </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-granularity"><i class="fa fa-filter"></i> <span data-i18n="aws.label.granularity"></span></label>
-        <select type="text" id="node-input-granularity" style="width:70%;">
-            <option value="HOURLY">HOURLY</option>
-            <option selected value="DAILY">DAILY</option>
-            <option value="MONTHLY">MONTHLY</option>
-          </select>
-    </div>
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="aws.label.name"></span></label>
-        <input type="text" id="node-input-name" data-i18n="[placeholder]aws.placeholder.name">
-    </div>
+  </div>
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="aws.label.name"></span></label>
+      <input type="text" id="node-input-name" data-i18n="[placeholder]aws.placeholder.name">
+  </div>
 </script>
 
 <script type="text/x-red" data-help-name="amazon-forecast-usage">
-    <h3>AWS getCostForecast node</h3>
+  <h3>AWS getCostForecast node</h3>
 
-    <h3>Inputs</h3>
-    <dl class="message-properties">
-        <dt>region
-            <span class="property-type">string</span>
-        </dt>
-        <dd>AWS regions. Default to us-east-1</dd>
+  <h3>Inputs</h3>
+  <dl class="message-properties">
+      <dt>region
+          <span class="property-type">string</span>
+      </dt>
+      <dd>AWS regions. Default to us-east-1</dd>
 
-        <dt>metric
-            <span class="property-type">string</span>
-        </dt>
-        <dd>AWS metrics. Default to AmortizedCost</dd>
+      <dt>metric
+          <span class="property-type">string</span>
+      </dt>
+      <dd>AWS metrics. Default to AmortizedCost</dd>
 
-        <dt>granularity
-            <span class="property-type">string</span>
-        </dt>
-        <dd>Accept HOURLY || DAILY || MONTHLY. Default to DAILY</dd>
-    </dl>
+      <dt>granularity
+          <span class="property-type">string</span>
+      </dt>
+      <dd>Accept HOURLY || DAILY || MONTHLY. Default to DAILY</dd>
+  </dl>
 
-    <h3>Outputs</h3>
-    <dl class="message-properties">
-        <dt>payload
-            <span class="property-type">object</span>
-        </dt>
-        <dd>AWS default payload</dd>
-    </dl>
+  <h3>Outputs</h3>
+  <dl class="message-properties">
+      <dt>payload
+          <span class="property-type">object</span>
+      </dt>
+      <dd>AWS default payload</dd>
+  </dl>
 </script>
 
 <script defer type="text/javascript">
-    RED.nodes.registerType('amazon-forecast-usage', {
-        category: 'AWS',
-        color: "#C0DEED",
-        defaults: {
-            aws: { type: "aws-config", required: true },
-            name: { value: "" },
-            region: { value: "", required: true },
-            metric: { value: "AMORTIZED_COST", required: true },
-            granularity: { value: "MONTHLY", required: true }
-        },
-        inputs: 1,
-        outputs: 1,
-        icon: "amazon.png",
-        align: "right",
-        label: function () {
-            return this.name || "Forecast usage";
-        },
-        oneditprepare: function () {},
-    });
+  RED.nodes.registerType('amazon-forecast-usage', {
+    category: 'AWS',
+    color: '#C0DEED',
+    defaults: {
+      aws: { type: 'aws-config', required: true },
+      name: { value: '' },
+      region: { value: '', required: true },
+      metric: { value: 'AMORTIZED_COST', required: true },
+      granularity: { value: 'MONTHLY', required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'amazon.png',
+    align: 'right',
+    label: function () {
+      return this.name || 'Forecast usage';
+    },
+    oneditprepare: function () {},
+  });
 </script>

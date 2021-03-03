@@ -39,38 +39,47 @@ module.exports = function (RED) {
             let today = new Date();
             let from = msg.from || formatDateToString(today);
             let to = msg.to || getLastDayOfMonth(today.getFullYear(), today.getMonth() + 1);
-            
+
             node.status({ fill: "blue", shape: "dot", text: "aws.status.initializing" });
 
-            let costExplorer = new AWS.CostExplorer({ region });
+            let costExplorer = new AWS.CostExplorer();
 
-            let params = {
-                Granularity: granularity, /* required */
-                Metric: metric, /* required */
-                TimePeriod: { /* required */
-                    End: to, /* required */
-                    Start: from /* required */
-                },
-            };
-            costExplorer.getCostForecast(params, function (err, data) {
-                if (err) {
-                    console.log('err', err)
-                    node.error(RED._("aws.error.fail", { err: err }), msg);
-                    node.status({ fill: "red", shape: "ring", text: "aws.status.error" });
-                    return;
+            region.map(re => {
+                let params = {
+                    Granularity: granularity, /* required */
+                    Metric: metric, /* required */
+                    TimePeriod: { /* required */
+                        End: to, /* required */
+                        Start: from /* required */
+                    },
+                    Filter: {
+                        Dimensions: {
+                            Key: "REGION",
+                            Values: [re],
+                        }
+                    },
                 };
+                costExplorer.getCostForecast(params, function (err, data) {
+                    if (err) {
+                        console.log('err', err)
+                        node.error(RED._("aws.error.fail", { err: err }), msg);
+                        node.status({ fill: "red", shape: "ring", text: "aws.status.error" });
+                        return;
+                    };
 
-                msg.payload = data;
-                node.status({});
-                node.send(msg); // successful response
-            });
+                    msg.payload = data;
+                    msg.region = re;
+                    node.status({});
+                    node.send(msg); // successful response
+                });
+            })
         });
     }
 
     const getLastDayOfMonth = (year, month) => {
         return formatDateToString(new Date(year, month + 1, 0));
     };
-    
+
     const formatDateToString = (date) => {
         let year = String(date.getFullYear()).padStart(2, '0');
         let month = String(date.getMonth() + 1).padStart(2, '0');
