@@ -1,7 +1,7 @@
 {
   "name": "node-red-contrib-aws-service",
   "description": "",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "main": "cost-usage.js",
   "devDependencies": {},
   "scripts": {

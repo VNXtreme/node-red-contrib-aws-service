@@ -69,6 +69,7 @@ module.exports = function (RED) {
 
                     msg.payload = data;
                     msg.region = re;
+                    msg.metric = metric;
                     node.status({});
                     node.send(msg); // successful response
                 });
