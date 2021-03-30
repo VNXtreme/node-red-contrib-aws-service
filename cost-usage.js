@@ -33,8 +33,8 @@ module.exports = function (RED) {
         node.on("input", async function (msg) {
             let region = msg.region || n.region || "us-east-1";
             let metric = msg.metric || n.metric || "AmortizedCost";
-            let from = msg.from || n.from || new Date().toJSON().slice(0, 10);
-            let to = msg.to || n.to || new Date().toJSON().slice(0, 10);
+            let from = msg.from || n.from || new Date().toISOString().substr(0, 10);
+            let to = msg.to || n.to || new Date().toISOString().substr(0, 10);
             let granularity = msg.granularity || n.granularity || "DAILY";
 
             node.status({ fill: "blue", shape: "dot", text: "aws.status.initializing" });

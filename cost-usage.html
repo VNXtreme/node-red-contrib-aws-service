@@ -121,8 +121,8 @@
             name: { value: "" },
             region: { value: "", required: true },
             metric: { value: "AmortizedCost", required: true },
-            from: { value: "", required: true },
-            to: { value: "", required: true },
+            from: { value: new Date().toISOString().substr(0, 10) },
+            to: { value: new Date().toISOString().substr(0, 10) },
             granularity: { value: "DAILY", required: true }
         },
         inputs: 1,
