@@ -117,7 +117,7 @@
         category: 'AWS',
         color: "#C0DEED",
         defaults: {
-            aws: { type: "aws-config", required: true },
+            aws: { type: "aws-configuration", required: true },
             name: { value: "" },
             region: { value: "", required: true },
             metric: { value: "AmortizedCost", required: true },
@@ -132,6 +132,6 @@
         label: function () {
             return this.name || "Cost usage";
         },
-        oneditprepare: function () {},
+        oneditprepare: function () { },
     });
 </script>

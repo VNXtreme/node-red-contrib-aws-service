@@ -101,7 +101,7 @@
     category: 'AWS',
     color: '#C0DEED',
     defaults: {
-      aws: { type: 'aws-config', required: true },
+      aws: { type: 'aws-configuration', required: true },
       name: { value: '' },
       region: { value: '', required: true },
       metric: { value: 'AMORTIZED_COST', required: true },
@@ -114,6 +114,6 @@
     label: function () {
       return this.name || 'Forecast usage';
     },
-    oneditprepare: function () {},
+    oneditprepare: function () { },
   });
 </script>
